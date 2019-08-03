@@ -1,0 +1,52 @@
+---
+layout: page
+---
+
+<div id="full-tags-list">
+  {% assign tag = page.tag %}
+  <h2 id="{{- tag -}}" class="linked-section">
+    <i class="fa fa-tag" aria-hidden="true"></i>
+    &nbsp;{{- tag -}}&nbsp;
+    {% if site.tags[tag].size %}
+      ({{ site.tags[tag].size }})
+    {% endif %}
+  </h2>
+  <div class="post-list">
+    {%- for post in site.tags[tag] -%}
+    <div class="tag-entry post-preview">
+      <div
+        class="d-flex flex-row flex-wrap"
+        style="border-bottom: 1px solid #ccc; margin-bottom: 16px"
+      >
+        <h2 class="post-title" style="margin-right: auto">
+          <a href="{{ post.url | relative_url }}">{{- post.title -}}</a>
+        </h2>
+        <div class="entry-date" style="margin: auto 0;">
+          <time
+            datetime="{{- post.date | date_to_xmlschema -}}"
+            >{{- post.date | date: "%B %d, %Y" -}}</time
+          >
+        </div>
+      </div>
+      <div class="post-entry">
+        {% assign max_excerpt_len = site.excerpt_length | minus: 20 %}
+        {{ post.excerpt | strip_html | xml_escape | truncate: max_excerpt_len }}
+        {% assign excerpt_word_count = post.excerpt | number_of_words %} {% if
+        post.content != post.excerpt or excerpt_word_count > site.excerpt_length
+        %}
+        <a href="{{ post.url | relative_url }}" class="post-read-more"
+          ><small>[Read&nbsp;More]</small></a
+        >
+        {% endif %}
+      </div>
+    </div>
+    {%- endfor -%}
+  </div>
+</div>
+{% unless site.tags[tag].size %}
+  <div class="center-container flex-column">
+    <div style="height: 7vh"></div>
+    <p>No post with this tag yet.</p>
+    <p>Back to <a href="/">Home Page</a>.</p>
+  </div>
+{% endunless %}
