@@ -15,13 +15,13 @@ layout: page
     {%- for post in site.tags[tag] -%}
     <div class="tag-entry post-preview">
       <div
-        class="d-flex flex-row flex-wrap"
+        class="d-flex flex-row flex-wrap align-items-baseline"
         style="border-bottom: 1px solid #ccc; margin-bottom: 16px"
       >
         <h2 class="post-title" style="margin-right: auto">
           <a href="{{ post.url | relative_url }}">{{- post.title -}}</a>
         </h2>
-        <div class="entry-date" style="margin: auto 0;">
+        <div class="entry-date">
           <time
             datetime="{{- post.date | date_to_xmlschema -}}"
             >{{- post.date | date: "%B %d, %Y" -}}</time
