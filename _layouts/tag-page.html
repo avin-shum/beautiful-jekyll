@@ -21,7 +21,7 @@ layout: page
         <h2 class="post-title" style="margin-right: auto">
           <a href="{{ post.url | relative_url }}">{{- post.title -}}</a>
         </h2>
-        <div class="entry-date">
+        <div class="entry-date" style="margin: auto 0;">
           <time
             datetime="{{- post.date | date_to_xmlschema -}}"
             >{{- post.date | date: "%B %d, %Y" -}}</time
@@ -41,6 +41,7 @@ layout: page
       </div>
     </div>
     {%- endfor -%}
+    <br>
   </div>
 </div>
 {% unless site.tags[tag].size %}
